@@ -5,6 +5,10 @@ plugins {
     id ("org.barfuin.gradle.jacocolog") version "3.1.0"
 
     id("com.diffplug.spotless") version "6.25.0"
+
+    pmd
+    checkstyle
+    id("com.github.spotbugs") version "6.0.8"
 }
 
 repositories {
@@ -70,4 +74,35 @@ tasks.check {
 
 tasks.register("format") {
     dependsOn(tasks.spotlessApply)
+}
+
+/* Linting */
+
+pmd {
+    toolVersion = "6.55.0"
+    isConsoleOutput = true
+}
+
+tasks.pmdTest {
+    enabled = false
+}
+
+tasks.withType<Pmd>().configureEach {
+    ignoreFailures = true
+}
+
+checkstyle {
+    toolVersion = "10.14.2"
+}
+
+tasks.checkstyleTest {
+    enabled = false
+}
+
+tasks.withType<Checkstyle>().configureEach {
+    ignoreFailures = true
+}
+
+spotbugs {
+    ignoreFailures = true
 }
