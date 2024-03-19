@@ -30,7 +30,7 @@ java {
 }
 
 application {
-    mainClass.set("org.example.App")
+    mainClass.set("agent.App")
 }
 
 tasks.jar {
