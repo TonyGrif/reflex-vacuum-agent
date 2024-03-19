@@ -3,6 +3,8 @@ plugins {
 
     jacoco
     id ("org.barfuin.gradle.jacocolog") version "3.1.0"
+
+    id("com.diffplug.spotless") version "6.25.0"
 }
 
 repositories {
@@ -50,4 +52,22 @@ tasks.named<Test>("test") {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
+}
+
+/* Code Formatting */
+
+spotless {
+    java {
+        importOrder()
+        cleanthat()
+        googleJavaFormat()
+    }
+}
+
+tasks.check {
+    dependsOn(tasks.spotlessCheck)
+}
+
+tasks.register("format") {
+    dependsOn(tasks.spotlessApply)
 }
