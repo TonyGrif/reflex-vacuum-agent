@@ -15,18 +15,18 @@ public class TileTest {
 
   @Test
   public void testConstructor() {
-    assertFalse(tile.getStatus(), "Tile status improperly set.");
+    assertFalse(tile.isDirty(), "Tile status improperly set.");
   }
 
   @Test
   public void testSetRandStatus() {
     tile.randSetStatus(0);
-    assertFalse(tile.getStatus(), "Incorrect random function, zero probability change.");
+    assertFalse(tile.isDirty(), "Incorrect random function, zero probability change.");
 
     tile.randSetStatus(100);
-    assertTrue(tile.getStatus(), "Incorrect random function, 100 probability no change.");
+    assertTrue(tile.isDirty(), "Incorrect random function, 100 probability no change.");
 
     tile.randSetStatus(0);
-    assertTrue(tile.getStatus(), "Value should not change if already dirty.");
+    assertTrue(tile.isDirty(), "Value should not change if already dirty.");
   }
 }

@@ -5,14 +5,14 @@ import java.util.Random;
 /** Stores the tile information. */
 public class Tile {
   /** Determines if a tile is currently dirty. */
-  private boolean isDirty;
+  private boolean dirty;
 
   /** Used to generate random numbers for setting Tile status. */
   private static final Random RANDOM = new Random();
 
   /** Default constructor for a Tile. */
   public Tile() {
-    this.isDirty = false;
+    this.dirty = false;
   }
 
   /**
@@ -22,13 +22,13 @@ public class Tile {
    *     to be between 0 and 100.
    */
   public void randSetStatus(int prob) {
-    if (this.isDirty) {
+    if (this.isDirty()) {
       return;
     }
 
     int value = RANDOM.nextInt(100);
     if (prob > value) {
-      this.isDirty = true;
+      this.dirty = true;
     }
   }
 
@@ -37,7 +37,7 @@ public class Tile {
    *
    * @return true if this Tile is dirty, false otherwise.
    */
-  public boolean getStatus() {
-    return this.isDirty;
+  public boolean isDirty() {
+    return this.dirty;
   }
 }
